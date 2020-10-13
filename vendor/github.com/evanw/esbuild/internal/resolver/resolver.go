@@ -89,6 +89,11 @@ type ResolveResult struct {
 	// If true, the class field transform should use Object.defineProperty().
 	StrictClassFields bool
 
+	// If true, unused imports are retained in TypeScript code. This matches the
+	// behavior of the "importsNotUsedAsValues" field in "tsconfig.json" when the
+	// value is not "remove".
+	PreserveUnusedImportsTS bool
+
 	// This is true if the file is inside a "node_modules" directory
 	SuppressWarningsAboutWeirdCode bool
 }
@@ -218,6 +223,7 @@ func (r *resolver) finalizeResolve(result ResolveResult) *ResolveResult {
 					result.JSXFactory = dirInfo.tsConfigJson.jsxFactory
 					result.JSXFragment = dirInfo.tsConfigJson.jsxFragmentFactory
 					result.StrictClassFields = dirInfo.tsConfigJson.useDefineForClassFields
+					result.PreserveUnusedImportsTS = dirInfo.tsConfigJson.preserveImportsNotUsedAsValues
 				}
 
 				if entry, ok := dirInfo.entries[base]; ok {
@@ -427,9 +433,10 @@ type tsConfigJson struct {
 	// "baseUrl" value in the "tsconfig.json" file.
 	paths map[string][]string
 
-	jsxFactory              []string
-	jsxFragmentFactory      []string
-	useDefineForClassFields bool
+	jsxFactory                     []string
+	jsxFragmentFactory             []string
+	useDefineForClassFields        bool
+	preserveImportsNotUsedAsValues bool
 }
 
 type dirInfo struct {
@@ -622,6 +629,13 @@ func (r *resolver) parseJsTsConfig(file string, visited map[string]bool) (*tsCon
 			}
 		}
 
+		// Parse "importsNotUsedAsValues"
+		if importsNotUsedAsValuesJson, _, ok := getProperty(compilerOptionsJson, "importsNotUsedAsValues"); ok {
+			if importsNotUsedAsValues, ok := getString(importsNotUsedAsValuesJson); ok {
+				result.preserveImportsNotUsedAsValues = importsNotUsedAsValues != "remove"
+			}
+		}
+
 		// Parse "paths"
 		if pathsJson, pathsKeyLoc, ok := getProperty(compilerOptionsJson, "paths"); ok {
 			if result.absPathBaseUrl == nil {
@@ -790,12 +804,9 @@ func (r *resolver) dirInfoUncached(path string) *dirInfo {
 		info.tsConfigJson = parentInfo.tsConfigJson
 	}
 
-	// Are all main fields from "package.json" missing?
-	if info.packageJson == nil || info.packageJson.absMainFields == nil {
-		// Look for an "index" file with known extensions
-		if absolute, ok := r.loadAsIndex(path, entries); ok {
-			info.absPathIndex = &absolute
-		}
+	// Look for an "index" file with known extensions
+	if absolute, ok := r.loadAsIndex(path, entries); ok {
+		info.absPathIndex = &absolute
 	}
 
 	return info
