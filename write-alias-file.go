@@ -27,6 +27,9 @@ func writeAliasFile(polyfills []*Polyfill, directory string) error {
 	defer f.Close()
 
 	enc := json.NewEncoder(f)
+	enc.SetEscapeHTML(false)
+	enc.SetIndent("", "\t")
+
 	err = enc.Encode(aliases)
 	if err != nil {
 		return err

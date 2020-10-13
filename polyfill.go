@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -221,7 +220,6 @@ func (x *Polyfill) loadSources() error {
 
 func (x *Polyfill) checkLicense() error {
 	if x.config.License == "" {
-		log.Printf("The license for %s is missing.", x.name)
 		return nil
 	}
 
@@ -325,6 +323,7 @@ func (x *Polyfill) writeOutput(root string) error {
 	encodedConfig := bytes.NewBuffer(nil)
 	configEncoder := json.NewEncoder(encodedConfig)
 	configEncoder.SetEscapeHTML(false)
+	configEncoder.SetIndent("", "\t")
 
 	err := configEncoder.Encode(x.config)
 	if err != nil {
