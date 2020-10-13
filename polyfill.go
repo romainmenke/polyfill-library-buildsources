@@ -41,7 +41,7 @@ type polyfillConfig struct {
 	IsPublic     bool   `json:"isPublic"`
 
 	Aliases      []string          `toml:"aliases" json:"aliases"`
-	Dependencies []string          `toml:"dependencies" json:"depedencies"`
+	Dependencies []string          `toml:"dependencies" json:"dependencies"`
 	Spec         string            `toml:"spec" json:"spec"`
 	Docs         string            `toml:"docs" json:"docs"`
 	License      string            `toml:"license" json:"license"`
@@ -261,7 +261,6 @@ func (x *Polyfill) minifyDetect(detectSource []byte) (source, error) {
 
 	result := api.Transform(string(detectSource), api.TransformOptions{
 		Loader:            api.LoaderJS,
-		Target:            api.ES5,
 		MinifyWhitespace:  true,
 		MinifyIdentifiers: true,
 		MinifySyntax:      true,
@@ -303,7 +302,6 @@ func (x *Polyfill) minifyPolyfill(polyfillSource []byte) (source, error) {
 
 	result := api.Transform(string(polyfillSource), api.TransformOptions{
 		Loader:            api.LoaderJS,
-		Target:            api.ES5,
 		MinifyWhitespace:  true,
 		MinifyIdentifiers: true,
 		MinifySyntax:      true,
