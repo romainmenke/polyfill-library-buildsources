@@ -1,0 +1,42 @@
+# github.com/BurntSushi/toml v0.3.1
+## explicit
+github.com/BurntSushi/toml
+# github.com/evanw/esbuild v0.7.9
+## explicit
+github.com/evanw/esbuild/internal/ast
+github.com/evanw/esbuild/internal/bundler
+github.com/evanw/esbuild/internal/compat
+github.com/evanw/esbuild/internal/config
+github.com/evanw/esbuild/internal/css_ast
+github.com/evanw/esbuild/internal/css_lexer
+github.com/evanw/esbuild/internal/css_parser
+github.com/evanw/esbuild/internal/css_printer
+github.com/evanw/esbuild/internal/fs
+github.com/evanw/esbuild/internal/js_ast
+github.com/evanw/esbuild/internal/js_lexer
+github.com/evanw/esbuild/internal/js_parser
+github.com/evanw/esbuild/internal/js_printer
+github.com/evanw/esbuild/internal/logger
+github.com/evanw/esbuild/internal/renamer
+github.com/evanw/esbuild/internal/resolver
+github.com/evanw/esbuild/internal/runtime
+github.com/evanw/esbuild/internal/sourcemap
+github.com/evanw/esbuild/pkg/api
+# github.com/hashicorp/go-cleanhttp v0.5.1
+## explicit
+github.com/hashicorp/go-cleanhttp
+# github.com/mitchellh/go-spdx v0.1.0
+## explicit
+github.com/mitchellh/go-spdx
+# github.com/philopon/go-toposort v0.0.0-20170620085441-9be86dbd762f
+## explicit
+github.com/philopon/go-toposort
+# github.com/pkg/errors v0.9.1
+## explicit
+github.com/pkg/errors
+# github.com/stevenle/topsort v0.0.0-20130922064739-8130c1d7596b
+## explicit
+# golang.org/x/sys v0.0.0-20201005172224-997123666555
+## explicit
+golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/unix
