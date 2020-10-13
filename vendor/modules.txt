@@ -34,8 +34,6 @@ github.com/philopon/go-toposort
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# github.com/stevenle/topsort v0.0.0-20130922064739-8130c1d7596b
-## explicit
 # golang.org/x/sys v0.0.0-20201005172224-997123666555
 ## explicit
 golang.org/x/sys/internal/unsafeheader

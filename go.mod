@@ -1,4 +1,4 @@
-module github.com/romainmenke/polyfill-library-tasks
+module github.com/romainmenke/polyfill-library-buildsources
 
 go 1.15
 
@@ -9,6 +9,5 @@ require (
 	github.com/mitchellh/go-spdx v0.1.0
 	github.com/philopon/go-toposort v0.0.0-20170620085441-9be86dbd762f
 	github.com/pkg/errors v0.9.1
-	github.com/stevenle/topsort v0.0.0-20130922064739-8130c1d7596b // indirect
 	golang.org/x/sys v0.0.0-20201005172224-997123666555 // indirect
 )
